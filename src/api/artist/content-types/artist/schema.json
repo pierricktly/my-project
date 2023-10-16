@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "artists",
+  "info": {
+    "singularName": "artist",
+    "pluralName": "artists",
+    "displayName": "Artist"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "idYoutubeMusic": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "releases": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::release.release",
+      "mappedBy": "artists"
+    }
+  }
+}
