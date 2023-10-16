@@ -10,6 +10,8 @@ module.exports = ({ env }) => ({
     keys: env.array("APP_KEYS"),
   },
   admin: {
+    url: "/admin",
+    serverAdminPanel: true,
     auth: {
       secret: env("ADMIN_JWT_SECRET"),
     },
