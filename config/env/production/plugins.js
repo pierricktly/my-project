@@ -10,6 +10,7 @@ module.exports = {
       introspection: true,
       apolloServer: {
         tracing: true,
+        introspection: true,
       },
     },
   },
