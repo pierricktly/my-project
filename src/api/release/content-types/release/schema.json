@@ -4,7 +4,8 @@
   "info": {
     "singularName": "release",
     "pluralName": "releases",
-    "displayName": "Release"
+    "displayName": "Release",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -25,6 +26,39 @@
       "relation": "manyToMany",
       "target": "api::artist.artist",
       "inversedBy": "releases"
+    },
+    "DateRelease": {
+      "type": "date",
+      "required": true
+    },
+    "Image": {
+      "type": "string",
+      "required": true
+    },
+    "Year": {
+      "type": "integer"
+    },
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "ALBUM",
+        "EP",
+        "SINGLE"
+      ],
+      "default": "SINGLE"
+    },
+    "Verified": {
+      "type": "boolean",
+      "default": true
+    },
+    "Platforms": {
+      "type": "json"
+    },
+    "music": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::music.music",
+      "mappedBy": "releases"
     }
   }
 }

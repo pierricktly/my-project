@@ -660,6 +660,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    comebacks: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::comeback.comeback'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -683,6 +688,7 @@ export interface ApiArtistArtist extends Schema.CollectionType {
     singularName: 'artist';
     pluralName: 'artists';
     displayName: 'Artist';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -694,6 +700,52 @@ export interface ApiArtistArtist extends Schema.CollectionType {
       'api::artist.artist',
       'manyToMany',
       'api::release.release'
+    >;
+    Image: Attribute.String;
+    Description: Attribute.Text;
+    Type: Attribute.Enumeration<['SOLO', 'GROUP']> &
+      Attribute.DefaultTo<'SOLO'>;
+    Socials: Attribute.JSON;
+    Styles: Attribute.Enumeration<
+      [
+        'K-POP',
+        'K-ROCK',
+        'K-RAP',
+        'K-RNB',
+        'K-HIPHOP',
+        'J-POP',
+        'J-ROCK',
+        'J-RAP',
+        'J-RNB',
+        'J-HIPHOP',
+        'C-POP',
+        'C-ROCK',
+        'C-RAP',
+        'C-RNB',
+        'C-HIPHOP'
+      ]
+    >;
+    Platforms: Attribute.JSON;
+    Verified: Attribute.Boolean & Attribute.DefaultTo<false>;
+    members: Attribute.Relation<
+      'api::artist.artist',
+      'manyToMany',
+      'api::artist.artist'
+    >;
+    groups: Attribute.Relation<
+      'api::artist.artist',
+      'manyToMany',
+      'api::artist.artist'
+    >;
+    comebacks: Attribute.Relation<
+      'api::artist.artist',
+      'oneToMany',
+      'api::comeback.comeback'
+    >;
+    musics: Attribute.Relation<
+      'api::artist.artist',
+      'manyToMany',
+      'api::music.music'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -713,12 +765,97 @@ export interface ApiArtistArtist extends Schema.CollectionType {
   };
 }
 
+export interface ApiComebackComeback extends Schema.CollectionType {
+  collectionName: 'comebacks';
+  info: {
+    singularName: 'comeback';
+    pluralName: 'comebacks';
+    displayName: 'Comeback';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Message: Attribute.String;
+    artist: Attribute.Relation<
+      'api::comeback.comeback',
+      'manyToOne',
+      'api::artist.artist'
+    >;
+    Date: Attribute.Date;
+    Verified: Attribute.Boolean;
+    user: Attribute.Relation<
+      'api::comeback.comeback',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::comeback.comeback',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::comeback.comeback',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMusicMusic extends Schema.CollectionType {
+  collectionName: 'musics';
+  info: {
+    singularName: 'music';
+    pluralName: 'musics';
+    displayName: 'Music';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    VideoID: Attribute.String & Attribute.Required & Attribute.Unique;
+    Duration: Attribute.Integer;
+    releases: Attribute.Relation<
+      'api::music.music',
+      'manyToMany',
+      'api::release.release'
+    >;
+    artists: Attribute.Relation<
+      'api::music.music',
+      'manyToMany',
+      'api::artist.artist'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::music.music',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::music.music',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiReleaseRelease extends Schema.CollectionType {
   collectionName: 'releases';
   info: {
     singularName: 'release';
     pluralName: 'releases';
     displayName: 'Release';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -730,6 +867,18 @@ export interface ApiReleaseRelease extends Schema.CollectionType {
       'api::release.release',
       'manyToMany',
       'api::artist.artist'
+    >;
+    DateRelease: Attribute.Date & Attribute.Required;
+    Image: Attribute.String & Attribute.Required;
+    Year: Attribute.Integer;
+    Type: Attribute.Enumeration<['ALBUM', 'EP', 'SINGLE']> &
+      Attribute.DefaultTo<'SINGLE'>;
+    Verified: Attribute.Boolean & Attribute.DefaultTo<true>;
+    Platforms: Attribute.JSON;
+    music: Attribute.Relation<
+      'api::release.release',
+      'manyToMany',
+      'api::music.music'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -766,6 +915,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::artist.artist': ApiArtistArtist;
+      'api::comeback.comeback': ApiComebackComeback;
+      'api::music.music': ApiMusicMusic;
       'api::release.release': ApiReleaseRelease;
     }
   }
