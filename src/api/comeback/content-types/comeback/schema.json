@@ -4,14 +4,15 @@
   "info": {
     "singularName": "comeback",
     "pluralName": "comebacks",
-    "displayName": "Comeback"
+    "displayName": "Comeback",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Message": {
+    "message": {
       "type": "string"
     },
     "artist": {
@@ -20,10 +21,10 @@
       "target": "api::artist.artist",
       "inversedBy": "comebacks"
     },
-    "Date": {
+    "date": {
       "type": "date"
     },
-    "Verified": {
+    "verified": {
       "type": "boolean"
     },
     "user": {

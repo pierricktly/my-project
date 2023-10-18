@@ -631,7 +631,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -660,6 +659,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    picture: Attribute.Text;
+    country: Attribute.String;
     comebacks: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToMany',
@@ -694,19 +695,18 @@ export interface ApiArtistArtist extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    Name: Attribute.String & Attribute.Required;
+    name: Attribute.String & Attribute.Required;
     idYoutubeMusic: Attribute.String & Attribute.Required & Attribute.Unique;
     releases: Attribute.Relation<
       'api::artist.artist',
       'manyToMany',
       'api::release.release'
     >;
-    Image: Attribute.String;
-    Description: Attribute.Text;
-    Type: Attribute.Enumeration<['SOLO', 'GROUP']> &
+    description: Attribute.Text;
+    type: Attribute.Enumeration<['SOLO', 'GROUP']> &
       Attribute.DefaultTo<'SOLO'>;
-    Socials: Attribute.JSON;
-    Styles: Attribute.Enumeration<
+    socials: Attribute.JSON;
+    styles: Attribute.Enumeration<
       [
         'K-POP',
         'K-ROCK',
@@ -725,8 +725,8 @@ export interface ApiArtistArtist extends Schema.CollectionType {
         'C-HIPHOP'
       ]
     >;
-    Platforms: Attribute.JSON;
-    Verified: Attribute.Boolean & Attribute.DefaultTo<false>;
+    platforms: Attribute.JSON;
+    verified: Attribute.Boolean & Attribute.DefaultTo<false>;
     members: Attribute.Relation<
       'api::artist.artist',
       'manyToMany',
@@ -747,6 +747,7 @@ export interface ApiArtistArtist extends Schema.CollectionType {
       'manyToMany',
       'api::music.music'
     >;
+    images: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -771,19 +772,20 @@ export interface ApiComebackComeback extends Schema.CollectionType {
     singularName: 'comeback';
     pluralName: 'comebacks';
     displayName: 'Comeback';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Message: Attribute.String;
+    message: Attribute.String;
     artist: Attribute.Relation<
       'api::comeback.comeback',
       'manyToOne',
       'api::artist.artist'
     >;
-    Date: Attribute.Date;
-    Verified: Attribute.Boolean;
+    date: Attribute.Date;
+    verified: Attribute.Boolean;
     user: Attribute.Relation<
       'api::comeback.comeback',
       'manyToOne',
@@ -813,14 +815,15 @@ export interface ApiMusicMusic extends Schema.CollectionType {
     singularName: 'music';
     pluralName: 'musics';
     displayName: 'Music';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Name: Attribute.String & Attribute.Required;
-    VideoID: Attribute.String & Attribute.Required & Attribute.Unique;
-    Duration: Attribute.Integer;
+    name: Attribute.String & Attribute.Required;
+    videoId: Attribute.String & Attribute.Required & Attribute.Unique;
+    duration: Attribute.Integer;
     releases: Attribute.Relation<
       'api::music.music',
       'manyToMany',
@@ -831,6 +834,7 @@ export interface ApiMusicMusic extends Schema.CollectionType {
       'manyToMany',
       'api::artist.artist'
     >;
+    images: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -861,20 +865,20 @@ export interface ApiReleaseRelease extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    Name: Attribute.String & Attribute.Required;
+    name: Attribute.String & Attribute.Required;
     idYoutubeMusic: Attribute.String & Attribute.Required & Attribute.Unique;
     artists: Attribute.Relation<
       'api::release.release',
       'manyToMany',
       'api::artist.artist'
     >;
-    DateRelease: Attribute.Date & Attribute.Required;
-    Image: Attribute.String & Attribute.Required;
-    Year: Attribute.Integer;
-    Type: Attribute.Enumeration<['ALBUM', 'EP', 'SINGLE']> &
+    dateRelease: Attribute.Date & Attribute.Required;
+    image: Attribute.String & Attribute.Required;
+    year: Attribute.Integer;
+    type: Attribute.Enumeration<['ALBUM', 'EP', 'SINGLE']> &
       Attribute.DefaultTo<'SINGLE'>;
-    Verified: Attribute.Boolean & Attribute.DefaultTo<true>;
-    Platforms: Attribute.JSON;
+    verified: Attribute.Boolean & Attribute.DefaultTo<true>;
+    platforms: Attribute.JSON;
     music: Attribute.Relation<
       'api::release.release',
       'manyToMany',

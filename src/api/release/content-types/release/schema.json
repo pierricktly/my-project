@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true
     },
@@ -27,18 +27,18 @@
       "target": "api::artist.artist",
       "inversedBy": "releases"
     },
-    "DateRelease": {
+    "dateRelease": {
       "type": "date",
       "required": true
     },
-    "Image": {
+    "image": {
       "type": "string",
       "required": true
     },
-    "Year": {
+    "year": {
       "type": "integer"
     },
-    "Type": {
+    "type": {
       "type": "enumeration",
       "enum": [
         "ALBUM",
@@ -47,11 +47,11 @@
       ],
       "default": "SINGLE"
     },
-    "Verified": {
+    "verified": {
       "type": "boolean",
       "default": true
     },
-    "Platforms": {
+    "platforms": {
       "type": "json"
     },
     "music": {

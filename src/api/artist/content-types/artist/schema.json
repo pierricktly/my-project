@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true
     },
@@ -27,13 +27,10 @@
       "target": "api::release.release",
       "mappedBy": "artists"
     },
-    "Image": {
-      "type": "string"
-    },
-    "Description": {
+    "description": {
       "type": "text"
     },
-    "Type": {
+    "type": {
       "type": "enumeration",
       "enum": [
         "SOLO",
@@ -41,10 +38,10 @@
       ],
       "default": "SOLO"
     },
-    "Socials": {
+    "socials": {
       "type": "json"
     },
-    "Styles": {
+    "styles": {
       "type": "enumeration",
       "enum": [
         "K-POP",
@@ -64,10 +61,10 @@
         "C-HIPHOP"
       ]
     },
-    "Platforms": {
+    "platforms": {
       "type": "json"
     },
-    "Verified": {
+    "verified": {
       "type": "boolean",
       "default": false
     },
@@ -94,6 +91,9 @@
       "relation": "manyToMany",
       "target": "api::music.music",
       "mappedBy": "artists"
+    },
+    "images": {
+      "type": "json"
     }
   }
 }

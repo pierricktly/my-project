@@ -4,23 +4,24 @@
   "info": {
     "singularName": "music",
     "pluralName": "musics",
-    "displayName": "Music"
+    "displayName": "Music",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "required": true
     },
-    "VideoID": {
+    "videoId": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "Duration": {
+    "duration": {
       "type": "integer"
     },
     "releases": {
@@ -34,6 +35,9 @@
       "relation": "manyToMany",
       "target": "api::artist.artist",
       "inversedBy": "musics"
+    },
+    "images": {
+      "type": "json"
     }
   }
 }
