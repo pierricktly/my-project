@@ -31,10 +31,6 @@
       "type": "date",
       "required": true
     },
-    "image": {
-      "type": "string",
-      "required": true
-    },
     "year": {
       "type": "integer"
     },
@@ -59,6 +55,9 @@
       "relation": "manyToMany",
       "target": "api::music.music",
       "mappedBy": "releases"
+    },
+    "images": {
+      "type": "json"
     }
   }
 }

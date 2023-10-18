@@ -362,6 +362,225 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiArtistArtist extends Schema.CollectionType {
+  collectionName: 'artists';
+  info: {
+    singularName: 'artist';
+    pluralName: 'artists';
+    displayName: 'Artist';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    idYoutubeMusic: Attribute.String & Attribute.Required & Attribute.Unique;
+    releases: Attribute.Relation<
+      'api::artist.artist',
+      'manyToMany',
+      'api::release.release'
+    >;
+    description: Attribute.Text;
+    type: Attribute.Enumeration<['SOLO', 'GROUP']> &
+      Attribute.DefaultTo<'SOLO'>;
+    socials: Attribute.JSON;
+    styles: Attribute.Enumeration<
+      [
+        'K-POP',
+        'K-ROCK',
+        'K-RAP',
+        'K-RNB',
+        'K-HIPHOP',
+        'J-POP',
+        'J-ROCK',
+        'J-RAP',
+        'J-RNB',
+        'J-HIPHOP',
+        'C-POP',
+        'C-ROCK',
+        'C-RAP',
+        'C-RNB',
+        'C-HIPHOP'
+      ]
+    >;
+    platforms: Attribute.JSON;
+    verified: Attribute.Boolean & Attribute.DefaultTo<false>;
+    members: Attribute.Relation<
+      'api::artist.artist',
+      'manyToMany',
+      'api::artist.artist'
+    >;
+    groups: Attribute.Relation<
+      'api::artist.artist',
+      'manyToMany',
+      'api::artist.artist'
+    >;
+    comebacks: Attribute.Relation<
+      'api::artist.artist',
+      'oneToMany',
+      'api::comeback.comeback'
+    >;
+    musics: Attribute.Relation<
+      'api::artist.artist',
+      'manyToMany',
+      'api::music.music'
+    >;
+    images: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::artist.artist',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::artist.artist',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiComebackComeback extends Schema.CollectionType {
+  collectionName: 'comebacks';
+  info: {
+    singularName: 'comeback';
+    pluralName: 'comebacks';
+    displayName: 'Comeback';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    message: Attribute.String;
+    artist: Attribute.Relation<
+      'api::comeback.comeback',
+      'manyToOne',
+      'api::artist.artist'
+    >;
+    date: Attribute.Date;
+    verified: Attribute.Boolean;
+    user: Attribute.Relation<
+      'api::comeback.comeback',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::comeback.comeback',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::comeback.comeback',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMusicMusic extends Schema.CollectionType {
+  collectionName: 'musics';
+  info: {
+    singularName: 'music';
+    pluralName: 'musics';
+    displayName: 'Music';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    videoId: Attribute.String & Attribute.Required & Attribute.Unique;
+    duration: Attribute.Integer;
+    releases: Attribute.Relation<
+      'api::music.music',
+      'manyToMany',
+      'api::release.release'
+    >;
+    artists: Attribute.Relation<
+      'api::music.music',
+      'manyToMany',
+      'api::artist.artist'
+    >;
+    images: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::music.music',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::music.music',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiReleaseRelease extends Schema.CollectionType {
+  collectionName: 'releases';
+  info: {
+    singularName: 'release';
+    pluralName: 'releases';
+    displayName: 'Release';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    idYoutubeMusic: Attribute.String & Attribute.Required & Attribute.Unique;
+    artists: Attribute.Relation<
+      'api::release.release',
+      'manyToMany',
+      'api::artist.artist'
+    >;
+    dateRelease: Attribute.Date & Attribute.Required;
+    year: Attribute.Integer;
+    type: Attribute.Enumeration<['ALBUM', 'EP', 'SINGLE']> &
+      Attribute.DefaultTo<'SINGLE'>;
+    verified: Attribute.Boolean & Attribute.DefaultTo<true>;
+    platforms: Attribute.JSON;
+    music: Attribute.Relation<
+      'api::release.release',
+      'manyToMany',
+      'api::music.music'
+    >;
+    images: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::release.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::release.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -683,225 +902,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiArtistArtist extends Schema.CollectionType {
-  collectionName: 'artists';
-  info: {
-    singularName: 'artist';
-    pluralName: 'artists';
-    displayName: 'Artist';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    idYoutubeMusic: Attribute.String & Attribute.Required & Attribute.Unique;
-    releases: Attribute.Relation<
-      'api::artist.artist',
-      'manyToMany',
-      'api::release.release'
-    >;
-    description: Attribute.Text;
-    type: Attribute.Enumeration<['SOLO', 'GROUP']> &
-      Attribute.DefaultTo<'SOLO'>;
-    socials: Attribute.JSON;
-    styles: Attribute.Enumeration<
-      [
-        'K-POP',
-        'K-ROCK',
-        'K-RAP',
-        'K-RNB',
-        'K-HIPHOP',
-        'J-POP',
-        'J-ROCK',
-        'J-RAP',
-        'J-RNB',
-        'J-HIPHOP',
-        'C-POP',
-        'C-ROCK',
-        'C-RAP',
-        'C-RNB',
-        'C-HIPHOP'
-      ]
-    >;
-    platforms: Attribute.JSON;
-    verified: Attribute.Boolean & Attribute.DefaultTo<false>;
-    members: Attribute.Relation<
-      'api::artist.artist',
-      'manyToMany',
-      'api::artist.artist'
-    >;
-    groups: Attribute.Relation<
-      'api::artist.artist',
-      'manyToMany',
-      'api::artist.artist'
-    >;
-    comebacks: Attribute.Relation<
-      'api::artist.artist',
-      'oneToMany',
-      'api::comeback.comeback'
-    >;
-    musics: Attribute.Relation<
-      'api::artist.artist',
-      'manyToMany',
-      'api::music.music'
-    >;
-    images: Attribute.JSON;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::artist.artist',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::artist.artist',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiComebackComeback extends Schema.CollectionType {
-  collectionName: 'comebacks';
-  info: {
-    singularName: 'comeback';
-    pluralName: 'comebacks';
-    displayName: 'Comeback';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    message: Attribute.String;
-    artist: Attribute.Relation<
-      'api::comeback.comeback',
-      'manyToOne',
-      'api::artist.artist'
-    >;
-    date: Attribute.Date;
-    verified: Attribute.Boolean;
-    user: Attribute.Relation<
-      'api::comeback.comeback',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::comeback.comeback',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::comeback.comeback',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiMusicMusic extends Schema.CollectionType {
-  collectionName: 'musics';
-  info: {
-    singularName: 'music';
-    pluralName: 'musics';
-    displayName: 'Music';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    videoId: Attribute.String & Attribute.Required & Attribute.Unique;
-    duration: Attribute.Integer;
-    releases: Attribute.Relation<
-      'api::music.music',
-      'manyToMany',
-      'api::release.release'
-    >;
-    artists: Attribute.Relation<
-      'api::music.music',
-      'manyToMany',
-      'api::artist.artist'
-    >;
-    images: Attribute.JSON;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::music.music',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::music.music',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiReleaseRelease extends Schema.CollectionType {
-  collectionName: 'releases';
-  info: {
-    singularName: 'release';
-    pluralName: 'releases';
-    displayName: 'Release';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    idYoutubeMusic: Attribute.String & Attribute.Required & Attribute.Unique;
-    artists: Attribute.Relation<
-      'api::release.release',
-      'manyToMany',
-      'api::artist.artist'
-    >;
-    dateRelease: Attribute.Date & Attribute.Required;
-    image: Attribute.String & Attribute.Required;
-    year: Attribute.Integer;
-    type: Attribute.Enumeration<['ALBUM', 'EP', 'SINGLE']> &
-      Attribute.DefaultTo<'SINGLE'>;
-    verified: Attribute.Boolean & Attribute.DefaultTo<true>;
-    platforms: Attribute.JSON;
-    music: Attribute.Relation<
-      'api::release.release',
-      'manyToMany',
-      'api::music.music'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::release.release',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::release.release',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -912,16 +912,16 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::artist.artist': ApiArtistArtist;
+      'api::comeback.comeback': ApiComebackComeback;
+      'api::music.music': ApiMusicMusic;
+      'api::release.release': ApiReleaseRelease;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::artist.artist': ApiArtistArtist;
-      'api::comeback.comeback': ApiComebackComeback;
-      'api::music.music': ApiMusicMusic;
-      'api::release.release': ApiReleaseRelease;
     }
   }
 }
