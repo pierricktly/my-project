@@ -32,10 +32,7 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": [
-        "SOLO",
-        "GROUP"
-      ],
+      "enum": ["SOLO", "GROUP"],
       "default": "SOLO"
     },
     "socials": {
@@ -78,7 +75,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::artist.artist",
-      "inversedBy": "members"
+      "mappedBy": "members"
     },
     "comebacks": {
       "type": "relation",

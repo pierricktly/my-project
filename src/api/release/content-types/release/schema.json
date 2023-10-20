@@ -36,11 +36,7 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": [
-        "ALBUM",
-        "EP",
-        "SINGLE"
-      ],
+      "enum": ["ALBUM", "EP", "SINGLE"],
       "default": "SINGLE"
     },
     "verified": {
