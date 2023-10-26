@@ -813,7 +813,7 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     username: Attribute.String & Attribute.Required;
@@ -832,7 +832,6 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::customer.customer',
       'oneToOne',
