@@ -696,7 +696,7 @@ export interface ApiArtistArtist extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    idYoutubeMusic: Attribute.String & Attribute.Required & Attribute.Unique;
+    idYoutubeMusic: Attribute.String & Attribute.Unique;
     releases: Attribute.Relation<
       'api::artist.artist',
       'manyToMany',
@@ -784,7 +784,7 @@ export interface ApiComebackComeback extends Schema.CollectionType {
       'manyToOne',
       'api::artist.artist'
     >;
-    date: Attribute.Date;
+    date: Attribute.Date & Attribute.Required;
     verified: Attribute.Boolean;
     user: Attribute.Relation<
       'api::comeback.comeback',

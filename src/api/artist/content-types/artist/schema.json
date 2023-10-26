@@ -19,7 +19,7 @@
     "idYoutubeMusic": {
       "type": "string",
       "unique": true,
-      "required": true
+      "required": false
     },
     "releases": {
       "type": "relation",
@@ -32,7 +32,10 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": ["SOLO", "GROUP"],
+      "enum": [
+        "SOLO",
+        "GROUP"
+      ],
       "default": "SOLO"
     },
     "socials": {

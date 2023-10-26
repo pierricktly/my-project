@@ -1,33 +1,33 @@
 {
   "name": "my-project",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "description": "A Strapi application",
-  "scripts": {
-    "develop": "strapi develop",
-    "start": "strapi start",
-    "build": "strapi build",
-    "strapi": "strapi",
-    "heroku-postbuild": "npm run build"
-  },
-  "dependencies": {
-    "@strapi/plugin-graphql": "4.14.5",
-    "@strapi/plugin-i18n": "4.14.5",
-    "@strapi/plugin-users-permissions": "4.14.5",
-    "@strapi/strapi": "4.14.5",
-    "better-sqlite3": "8.6.0",
-    "pg": "^8.11.3",
-    "pg-connection-string": "^2.6.2"
-  },
+  "license": "MIT",
   "author": {
     "name": "A Strapi developer"
   },
-  "strapi": {
-    "uuid": "1be58e8b-9983-4385-a586-0022e7792384"
+  "scripts": {
+    "build": "strapi build",
+    "develop": "strapi develop",
+    "heroku-postbuild": "npm run build",
+    "start": "strapi start",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/plugin-graphql": "4.15.0",
+    "@strapi/plugin-i18n": "4.15.0",
+    "@strapi/plugin-users-permissions": "4.15.0",
+    "@strapi/strapi": "4.15.0",
+    "better-sqlite3": "8.6.0",
+    "pg": "^8.11.3",
+    "pg-connection-string": "^2.6.2"
   },
   "engines": {
     "node": "18.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "strapi": {
+    "uuid": "1be58e8b-9983-4385-a586-0022e7792384"
+  }
 }

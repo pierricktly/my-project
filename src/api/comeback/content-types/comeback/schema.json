@@ -22,7 +22,8 @@
       "inversedBy": "comebacks"
     },
     "date": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "verified": {
       "type": "boolean"
