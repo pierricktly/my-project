@@ -808,9 +808,10 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     singularName: 'customer';
     pluralName: 'customers';
     displayName: 'Customer';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     idFirebase: Attribute.String;
@@ -825,7 +826,6 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::customer.customer',
       'oneToOne',
