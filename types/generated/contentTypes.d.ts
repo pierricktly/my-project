@@ -661,11 +661,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     picture: Attribute.Text;
     country: Attribute.String;
-    comebacks: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::comeback.comeback'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -786,10 +781,10 @@ export interface ApiComebackComeback extends Schema.CollectionType {
     >;
     date: Attribute.Date & Attribute.Required;
     verified: Attribute.Boolean;
-    user: Attribute.Relation<
+    customer: Attribute.Relation<
       'api::comeback.comeback',
       'manyToOne',
-      'plugin::users-permissions.user'
+      'api::customer.customer'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -802,6 +797,50 @@ export interface ApiComebackComeback extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::comeback.comeback',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCustomerCustomer extends Schema.CollectionType {
+  collectionName: 'customers';
+  info: {
+    singularName: 'customer';
+    pluralName: 'customers';
+    displayName: 'Customer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    username: Attribute.String & Attribute.Required;
+    country: Attribute.String;
+    picture: Attribute.Text;
+    email: Attribute.Email;
+    role: Attribute.Enumeration<
+      ['ADMIN', 'MODERATOR', 'SUBSCRIBER', 'DEFAULT']
+    > &
+      Attribute.DefaultTo<'DEFAULT'>;
+    idFirebase: Attribute.Text;
+    comebacks: Attribute.Relation<
+      'api::customer.customer',
+      'oneToMany',
+      'api::comeback.comeback'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::customer.customer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::customer.customer',
       'oneToOne',
       'admin::user'
     > &
@@ -920,6 +959,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::artist.artist': ApiArtistArtist;
       'api::comeback.comeback': ApiComebackComeback;
+      'api::customer.customer': ApiCustomerCustomer;
       'api::music.music': ApiMusicMusic;
       'api::release.release': ApiReleaseRelease;
     }

@@ -70,12 +70,6 @@
     },
     "country": {
       "type": "string"
-    },
-    "comebacks": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::comeback.comeback",
-      "mappedBy": "user"
     }
   }
 }
