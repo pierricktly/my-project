@@ -4,14 +4,16 @@
   "info": {
     "singularName": "customer",
     "pluralName": "customers",
-    "displayName": "Customer",
-    "description": ""
+    "displayName": "Customer"
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
+    "idFirebase": {
+      "type": "string"
+    },
     "username": {
       "type": "string",
       "required": true
@@ -22,21 +24,13 @@
     "picture": {
       "type": "text"
     },
-    "email": {
-      "type": "email"
-    },
     "role": {
       "type": "enumeration",
       "enum": [
         "ADMIN",
         "MODERATOR",
-        "SUBSCRIBER",
         "DEFAULT"
-      ],
-      "default": "DEFAULT"
-    },
-    "idFirebase": {
-      "type": "text"
+      ]
     },
     "comebacks": {
       "type": "relation",

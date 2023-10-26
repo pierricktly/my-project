@@ -659,8 +659,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    picture: Attribute.Text;
-    country: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -810,21 +808,16 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     singularName: 'customer';
     pluralName: 'customers';
     displayName: 'Customer';
-    description: '';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
+    idFirebase: Attribute.String;
     username: Attribute.String & Attribute.Required;
     country: Attribute.String;
     picture: Attribute.Text;
-    email: Attribute.Email;
-    role: Attribute.Enumeration<
-      ['ADMIN', 'MODERATOR', 'SUBSCRIBER', 'DEFAULT']
-    > &
-      Attribute.DefaultTo<'DEFAULT'>;
-    idFirebase: Attribute.Text;
+    role: Attribute.Enumeration<['ADMIN', 'MODERATOR', 'DEFAULT']>;
     comebacks: Attribute.Relation<
       'api::customer.customer',
       'oneToMany',
@@ -832,6 +825,7 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::customer.customer',
       'oneToOne',
