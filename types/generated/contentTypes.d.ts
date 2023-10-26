@@ -768,7 +768,7 @@ export interface ApiComebackComeback extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     message: Attribute.String;
@@ -786,7 +786,6 @@ export interface ApiComebackComeback extends Schema.CollectionType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::comeback.comeback',
       'oneToOne',
