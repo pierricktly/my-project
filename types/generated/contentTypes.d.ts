@@ -699,25 +699,6 @@ export interface ApiArtistArtist extends Schema.CollectionType {
     type: Attribute.Enumeration<['SOLO', 'GROUP']> &
       Attribute.DefaultTo<'SOLO'>;
     socials: Attribute.JSON;
-    styles: Attribute.Enumeration<
-      [
-        'K-POP',
-        'K-ROCK',
-        'K-RAP',
-        'K-RNB',
-        'K-HIPHOP',
-        'J-POP',
-        'J-ROCK',
-        'J-RAP',
-        'J-RNB',
-        'J-HIPHOP',
-        'C-POP',
-        'C-ROCK',
-        'C-RAP',
-        'C-RNB',
-        'C-HIPHOP'
-      ]
-    >;
     platforms: Attribute.JSON;
     verified: Attribute.Boolean & Attribute.DefaultTo<false>;
     members: Attribute.Relation<
@@ -741,6 +722,7 @@ export interface ApiArtistArtist extends Schema.CollectionType {
       'api::music.music'
     >;
     images: Attribute.JSON;
+    styles: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

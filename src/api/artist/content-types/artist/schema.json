@@ -41,26 +41,6 @@
     "socials": {
       "type": "json"
     },
-    "styles": {
-      "type": "enumeration",
-      "enum": [
-        "K-POP",
-        "K-ROCK",
-        "K-RAP",
-        "K-RNB",
-        "K-HIPHOP",
-        "J-POP",
-        "J-ROCK",
-        "J-RAP",
-        "J-RNB",
-        "J-HIPHOP",
-        "C-POP",
-        "C-ROCK",
-        "C-RAP",
-        "C-RNB",
-        "C-HIPHOP"
-      ]
-    },
     "platforms": {
       "type": "json"
     },
@@ -93,6 +73,9 @@
       "mappedBy": "artists"
     },
     "images": {
+      "type": "json"
+    },
+    "styles": {
       "type": "json"
     }
   }
